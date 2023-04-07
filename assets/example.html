@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Example</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/assets/global.css">
+    <style>
+        main {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+        }
+
+        .item {
+            width: 10rem;
+            height: 10rem;
+            background-color: var(--color);
+        }
+
+        .colors .item {
+            flex-grow: 1;
+        }
+
+        .spacing .item:nth-child(2) {
+            margin-left: var(--s-small);
+        }
+
+        .spacing .item:nth-child(3) {
+            margin-left: var(--s-medium);
+        }
+
+        .spacing .item:nth-child(4) {
+            margin-left: var(--s-large);
+        }
+
+        .spacing .item:nth-child(5) {
+            margin-left: var(--s-extra-large);
+        }
+
+        h2 {
+            margin: 1rem 0;
+            width: 100%;
+            text-align: center;
+        }
+
+    </style>
+</head>
+
+<body>
+    <h2>Colors</h2>
+    <main class="colors">
+        <div class="item" style="--color: var(--c-background);"></div>
+        <div class="item" style="--color: var(--c-text);"></div>
+        <div class="item" style="--color: var(--c-primary-1);"></div>
+        <div class="item" style="--color: var(--c-primary-2);"></div>
+        <div class="item" style="--color: var(--c-primary-3);"></div>
+        <div class="item" style="--color: var(--c-success);"></div>
+        <div class="item" style="--color: var(--c-warning);"></div>
+        <div class="item" style="--color: var(--c-danger);"></div>
+    </main>
+    <h2>Spacing</h2>
+    <main class="spacing">
+        <div class="item" style="--color: var(--c-text);"></div>
+        <div class="item" style="--color: var(--c-text);"></div>
+        <div class="item" style="--color: var(--c-text);"></div>
+        <div class="item" style="--color: var(--c-text);"></div>
+        <div class="item" style="--color: var(--c-text);"></div>
+    </main>
+</body>
+
+</html>

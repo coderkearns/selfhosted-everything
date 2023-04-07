@@ -1,0 +1,36 @@
+@font-face {
+    font-family: "Anuphan";
+    src: local("Anuphan"), url("/assets/Anuphan.ttf");
+}
+
+:root {
+    /* COLORS */
+    --c-background: #faf9f9;
+    --c-text: #23222A;
+    --c-primary-1: #581ACB;
+    --c-primary-2: #946ddc;
+    --c-primary-3: #c8b5eb;
+    --c-success: #1ACB52;
+    --c-warning: #E3D926;
+    --c-danger: #E21D1D;
+
+    /* FONTS */
+    --font-size: 16px;
+    --font-family: "Anuphan", sans-serif;
+
+    /* SPACING */
+    --s-small: 0.5rem;
+    --s-medium: 1rem;
+    --s-large: 1.5rem;
+    --s-extra-large: 3rem;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--c-background);
+    color: var(--c-text);
+    font-size: var(--font-size);
+    font-family: var(--font-family);
+}
