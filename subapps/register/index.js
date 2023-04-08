@@ -24,12 +24,17 @@ module.exports = class extends SubApp {
                 return
             }
 
-            const user = {
-                username,
-                data: {}
-            }
-            this.app.store.set(username, user)
+            this.registerUser(username)
             res.redirect("/login")
         })
+    }
+
+    /* CONTROLLERS */
+    registerUser(username) {
+        const user = {
+            username,
+            data: {}
+        }
+        this.app.store.set(username, user)
     }
 }
