@@ -1,23 +1,53 @@
 const express = require("express")
-const path = require("path")
-const { registerSubApps } = require("./util")
-const Store = require("./util/store")
 
 const app = express()
+module.exports = app
 
-app.users = new Store(path.join(__dirname, "data", "users.json"))
-
-app.use("/assets", express.static("assets"))
+const modules = require("./modules")
+registerSubModules(app,
+    modules.useViewEngine,
+    modules.useAssets,
+    modules.useSession,
+    modules.useStore(`${__dirname}/data/store.json`)
+)
 
 registerSubApps(app,
     require("./subapps/ping"),
+    require("./subapps/index"),
+    require("./subapps/register"),
+    require("./subapps/login"),
 )
 
+// 404 Handler
+app.use((req, res) => {
+    res.sendStatus(404)
+})
+
+// 500 Handler
+app.use((err, req, res, next) => {
+    console.error(err)
+    res.sendStatus(500)
+})
+
 app.close = () => {
-    app.users.save()
+    app.store.save()
     for (const subApp in app.subapps) {
         app.subapps[subApp].close()
     }
 }
 
-module.exports = app
+
+function registerSubApps(app, ...subapps) {
+    app.subapps = {}
+    for (const subApp of subapps) {
+        const instance = new subApp(app)
+        app.subapps[instance.NAME] = instance
+        app.use(instance.SLUG, instance.router)
+    }
+}
+
+function registerSubModules(app, ...modules) {
+    for (const module of modules) {
+        module(app)
+    }
+}
