@@ -1,24 +1,27 @@
 const fs = require("fs")
+const path = require("path")
+
+const DATA_PATH = path.resolve(__dirname, "..", "data")
 
 class Store extends Map {
-    constructor(savePath, data) {
+    constructor(saveFile, data) {
         super(data)
-        this.savePath = savePath
+        this.saveFile = path.join(DATA_PATH, saveFile)
     }
 
-    static loadFrom(savePath) {
+    static loadFrom(saveFile) {
         let data
-        if (!fs.existsSync(this.savePath)) {
+        if (!fs.existsSync(this.saveFile)) {
             data = []
         } else {
-            data = JSON.parse(fs.readFileSync(this.savePath))
+            data = JSON.parse(fs.readFileSync(this.saveFile))
         }
 
-        return new Store(savePath, data)
+        return new Store(saveFile, data)
     }
 
     save() {
-        fs.writeFileSync(this.savePath, JSON.stringify(Array.from(this)))
+        fs.writeFileSync(this.saveFile, JSON.stringify(Array.from(this)))
     }
 
 }

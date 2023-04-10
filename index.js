@@ -8,7 +8,7 @@ registerSubModules(app,
     modules.useViewEngine,
     modules.useAssets,
     modules.useSession,
-    modules.useStore(`${__dirname}/data/store.json`)
+    modules.useStore(`global.json`)
 )
 
 registerSubApps(app,
