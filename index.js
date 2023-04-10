@@ -3,6 +3,9 @@ const express = require("express")
 const app = express()
 module.exports = app
 
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+
 const modules = require("./modules")
 registerSubModules(app,
     modules.useViewEngine,
@@ -16,6 +19,7 @@ registerSubApps(app,
     require("./subapps/index"),
     require("./subapps/register"),
     require("./subapps/login"),
+    require("./subapps/testauth"),
 )
 
 // 404 Handler

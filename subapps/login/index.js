@@ -17,7 +17,7 @@ module.exports = class extends SubApp {
                 return
             }
 
-            const user = this.store.get(username)
+            const user = this.app.store.get(username)
             if (!user) {
                 res.render("login", {
                     error: "User not found"
