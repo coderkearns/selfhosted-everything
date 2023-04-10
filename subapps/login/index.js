@@ -5,11 +5,11 @@ module.exports = class extends SubApp {
     SLUG = "/login"
 
     configureRouter(router) {
-        router.get("/", (req, res) => {
+        router.get("/", this.redirectIfLoggedIn, (req, res) => {
             res.render("login")
         })
 
-        router.post("/", (req, res) => {
+        router.post("/", this.redirectIfLoggedIn, (req, res) => {
             const username = req.body.username
 
             if (!username) {
@@ -28,5 +28,12 @@ module.exports = class extends SubApp {
             req.session.user = user
             res.redirect("/")
         })
+    }
+
+    /* MIDDLEWARE */
+    redirectIfLoggedIn(req, res, next) {
+        if (req.session.user) {
+            res.redirect("/")
+        }
     }
 }

@@ -5,11 +5,11 @@ module.exports = class extends SubApp {
     SLUG = "/register"
 
     configureRouter(router) {
-        router.get("/", (req, res) => {
+        router.get("/", this.app.subapps.login.redirectIfLoggedIn, (req, res) => {
             res.render("register")
         })
 
-        router.post("/", (req, res) => {
+        router.post("/", this.app.subapps.login.redirectIfLoggedIn, (req, res) => {
             const username = req.body.username
 
             if (!username) {
