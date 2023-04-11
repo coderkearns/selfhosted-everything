@@ -37,8 +37,10 @@ app.use((err, req, res, next) => {
 })
 
 app.close = () => {
+    console.log(`[app] Closing global store`)
     app.store.save()
     for (const subApp in app.subapps) {
+        console.log(`[subapp] Closing ${subApp}`)
         app.subapps[subApp].close()
     }
 }
@@ -47,11 +49,13 @@ app.close = () => {
 function registerSubApps(app, ...subapps) {
     app.subapps = {}
     for (const subApp of subapps) {
+        console.log(`[subapp] Initializing ${subApp.NAME}`)
         const instance = new subApp(app)
-        app.subapps[instance.NAME] = instance
-        app.use(instance.SLUG, instance.router)
+        app.subapps[subApp.NAME] = instance
+        app.use(subApp.SLUG, instance.router)
     }
     for (const subApp in app.subapps) {
+        console.log(`[subapp] Configuring ${subApp}`)
         app.subapps[subApp].configure()
     }
 }

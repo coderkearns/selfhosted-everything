@@ -26,8 +26,8 @@ const fileUpload = multer({
 })
 
 module.exports = class extends SubApp {
-    NAME = "files"
-    SLUG = "/files"
+    static NAME = "files"
+    static SLUG = "/files"
 
     initialize() {
         if (!fs.existsSync(UPLOADS_PATH)) {

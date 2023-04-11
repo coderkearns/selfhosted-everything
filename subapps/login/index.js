@@ -1,8 +1,8 @@
 const SubApp = require("../subapp")
 
 module.exports = class extends SubApp {
-    NAME = "login"
-    SLUG = "/login"
+    static NAME = "login"
+    static SLUG = "/login"
 
     configureRouter(router) {
         router.get("/", this.redirectIfLoggedIn, (req, res) => {

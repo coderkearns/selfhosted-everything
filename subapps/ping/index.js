@@ -1,8 +1,8 @@
 const SubApp = require("../subapp")
 
 module.exports = class extends SubApp {
-    NAME = "ping"
-    SLUG = "/ping"
+    static NAME = "ping"
+    static SLUG = "/ping"
 
     configureRouter(router) {
         router.get("/", (req, res) => {
