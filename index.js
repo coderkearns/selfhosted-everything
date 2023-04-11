@@ -21,7 +21,6 @@ registerSubApps(app,
     require("./subapps/index"),
     require("./subapps/register"),
     require("./subapps/login"),
-    require("./subapps/testauth"),
     require("./subapps/files"),
 )
 
