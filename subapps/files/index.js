@@ -4,6 +4,7 @@ const fs = require("fs")
 
 const SubApp = require("../subapp")
 const requireAuth = require("../../shared/requireAuth")
+const Store = require("../../shared/store")
 
 const multer = require("multer")
 
@@ -32,24 +33,30 @@ module.exports = class extends SubApp {
         if (!fs.existsSync(UPLOADS_PATH)) {
             fs.mkdirSync(UPLOADS_PATH)
         }
+
+        this.store = Store.loadFrom("files.json")
     }
 
     configureRouter(router) {
         router.use(requireAuth)
 
         router.get("/", (req, res) => {
+            const user = this.getUser(req.session.user)
+
             res.render("files/index", {
-                files: this.getFilesMap(req)
+                files: user.files
             })
         })
 
         router.get("/download", (req, res) => {
             const file = req.query.file
             if (fs.existsSync(path.join(UPLOADS_PATH, file))) {
-                this.streamFile(req, file).pipe(res)
+                this.streamFile(file, res)
                 return
+            } else {
+                res.redirect("/files")
             }
-            res.redirect("/files")
+
         })
 
         router.get("/upload", (req, res) => {
@@ -57,19 +64,32 @@ module.exports = class extends SubApp {
         })
 
         router.post("/upload", fileUpload.single("itemFile"), (req, res) => {
-            const userFiles = this.getFilesMap(req)
-            userFiles[req.body.itemName] = req.file.filename
+            this.addFile(req.session.user, req.body.itemName, req.file.filename)
             res.redirect("/files")
         })
 
     }
 
-    /* CONTROLLERS */
-    getFilesMap(req) {
-        return this.app.store.get(req.session.user).data.files || {}
+    close() {
+        this.store.save()
     }
 
-    streamFile(req, file) {
-        return fs.createReadStream(path.join(UPLOADS_PATH, file))
+    /* CONTROLLERS */
+    getUser(username) {
+        let user = this.store.get(username)
+        if (!user) {
+            user = { files: {} }
+            this.store.set(username, user)
+        }
+        return user
+    }
+
+    addFile(username, name, file) {
+        const user = this.getUser(username)
+        user.files[name] = file
+    }
+
+    streamFile(file, res) {
+        return fs.createReadStream(path.join(UPLOADS_PATH, file)).pipe(res)
     }
 }

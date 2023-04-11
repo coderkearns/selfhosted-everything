@@ -33,9 +33,7 @@ module.exports = class extends SubApp {
     registerUser(username) {
         const user = {
             username,
-            data: {
-                files: {}
-            }
+            settings: {}
         }
         this.app.store.set(username, user)
     }

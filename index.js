@@ -3,6 +3,8 @@ const express = require("express")
 const app = express()
 module.exports = app
 
+app.__dirname = __dirname
+
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
