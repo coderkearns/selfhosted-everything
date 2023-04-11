@@ -1,0 +1,22 @@
+<%- include("../includes/header", {
+    title: "Files",
+    styles: ["/assets/maintext.css", "/assets/files.css"]
+}) %>
+
+<div class="content">
+
+  <h1>File Transfer</h1>
+
+  <p class="link"><a href="/files/upload">Upload a file</a></p>
+
+  <h2>Your Files</h2>
+
+  <ul>
+    <% for (const file in files) { %>
+    <li><a href="/files/download?file=<%= files[file] %>"><%= file %></a></li>
+    <% } %>
+  </ul>
+
+</div>
+
+<%- include("../includes/footer") %>

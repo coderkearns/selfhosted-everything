@@ -20,6 +20,7 @@ registerSubApps(app,
     require("./subapps/register"),
     require("./subapps/login"),
     require("./subapps/testauth"),
+    require("./subapps/files"),
 )
 
 // 404 Handler

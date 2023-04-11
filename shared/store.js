@@ -6,15 +6,17 @@ const DATA_PATH = path.resolve(__dirname, "..", "data")
 class Store extends Map {
     constructor(saveFile, data) {
         super(data)
-        this.saveFile = path.join(DATA_PATH, saveFile)
+        this.saveFile = saveFile
     }
 
     static loadFrom(saveFile) {
+        saveFile = path.join(DATA_PATH, saveFile)
+
         let data
-        if (!fs.existsSync(this.saveFile)) {
+        if (!fs.existsSync(saveFile)) {
             data = []
         } else {
-            data = JSON.parse(fs.readFileSync(this.saveFile))
+            data = JSON.parse(fs.readFileSync(saveFile))
         }
 
         return new Store(saveFile, data)

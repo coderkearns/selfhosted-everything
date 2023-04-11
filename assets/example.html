@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/assets/global.css">
     <style>
-        main {
+        section {
             width: 100%;
             display: flex;
             flex-direction: row;
@@ -44,12 +44,18 @@
             text-align: center;
         }
 
+        .fonts {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        }
+
     </style>
 </head>
 
 <body>
     <h2>Colors</h2>
-    <main class="colors">
+    <section class="colors">
         <div class="item" style="--color: var(--c-background);"></div>
         <div class="item" style="--color: var(--c-text);"></div>
         <div class="item" style="--color: var(--c-primary-1);"></div>
@@ -58,15 +64,41 @@
         <div class="item" style="--color: var(--c-success);"></div>
         <div class="item" style="--color: var(--c-warning);"></div>
         <div class="item" style="--color: var(--c-danger);"></div>
-    </main>
+    </section>
     <h2>Spacing</h2>
-    <main class="spacing">
-        <div class="item" style="--color: var(--c-text);"></div>
-        <div class="item" style="--color: var(--c-text);"></div>
-        <div class="item" style="--color: var(--c-text);"></div>
-        <div class="item" style="--color: var(--c-text);"></div>
-        <div class="item" style="--color: var(--c-text);"></div>
-    </main>
+    <section class="spacing">
+      <div class="item" style="--color: var(--c-text);"></div>
+      <div class="item" style="--color: var(--c-text);"></div>
+      <div class="item" style="--color: var(--c-text);"></div>
+      <div class="item" style="--color: var(--c-text);"></div>
+      <div class="item" style="--color: var(--c-text);"></div>
+    </section>
+    <h2>Fonts</h2>
+    <section class="fonts">
+      <div>
+        <h3>Main Font</h3>
+        <p>Anuphan</p>
+      </div>
+      <div>
+        <h3>Styles</h3>
+        <p style="font-style: italic;">Italic</p>
+        <p style="font-weight: 100;">Weight 100</p>
+        <p style="font-weight: 200;">Weight 200</p>
+        <p style="font-weight: 300;">Weight 300</p>
+        <p style="font-weight: 400;">Weight 400</p>
+        <p style="font-weight: 500;">Weight 500</p>
+        <p style="font-weight: 600;">Weight 600</p>
+        <p style="font-weight: 700;">Weight 700</p>
+        <p style="font-weight: 800;">Weight 800</p>
+        <p style="font-weight: 900;">Weight 900</p>
+      </div>
+      <div>
+        <h3>Sizes</h3>
+        <p style="font-size: 0.5rem;">0.5rem</p>
+        <p style="font-size: 1rem;">1rem</p>
+        <p style="font-size: 1.5rem;">1.5rem</p>
+        <p style="font-size: 2rem;">2rem</p>
+      </div>
 </body>
 
 </html>

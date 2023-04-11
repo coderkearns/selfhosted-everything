@@ -1,16 +1,21 @@
-<%- include("includes/header", { title: "Login" }) %>
+<%- include("includes/header", {
+    title: "Login",
+    styles: ["/assets/mainform.css"]
+}) %>
 
-<h1>Login page!</h1>
+<div>
+  <h1>Login</h1>
 
-<% if (typeof error !== "undefined") { %>
-<p><%= error %></p>
-<% } %>
+    <% if (typeof error !== "undefined") { %>
+    <p><%= error %></p>
+    <% } %>
 
-<form method="POST">
-  <input type="text" name="username" placeholder="Username">
-  <input type="submit" value="Submit">
-</form>
+    <form method="POST">
+      <input type="text" name="username" placeholder="Username">
+      <input type="submit" value="Submit">
+    </form>
 
-<a href="/register">Don't have an account? Register here.</a>
+    <a href="/register">Don't have an account? Register here.</a>
+</div>
 
 <%- include("includes/footer") %>

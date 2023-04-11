@@ -1,0 +1,16 @@
+<%- include("../includes/header", {
+    title: "Upload | Files",
+    styles: ["/assets/mainform.css"]
+}) %>
+
+<div>
+  <h1>Upload a File</h1>
+
+  <form method="POST" enctype="multipart/form-data">
+    <input type="file" name="itemFile">
+    <input type="text" name="itemName" placeholder="Item Name">
+    <input type="submit" value="Submit">
+  </form>
+</div>
+
+<%- include("../includes/footer") %>

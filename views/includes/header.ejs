@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title>
-    <% if (title) { %>
+    <% if (typeof title !== "undefined") { %>
     <%= title %> | SelfHosted Everything
     <% } else { %>
     SelfHosted Everything
@@ -13,6 +13,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/assets/normalize.css">
   <link rel="stylesheet" href="/assets/global.css">
+  <% for (const style of typeof styles !== "undefined" ? styles : []) { %>
+  <link rel="stylesheet" href="<%= style %>">
+  <% } %>
+  <% if (typeof header !== "undefined") { %><%- header %><% } %>
 </head>
 
 <body>
+
+<header>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/files">Files</a>
+    <a href="/login">Login</a>
+  </nav>
+</header>
+
+<main>

@@ -25,7 +25,7 @@ module.exports = class extends SubApp {
                 return
             }
 
-            req.session.user = user
+            req.session.user = username
             res.redirect("/")
         })
     }
@@ -34,6 +34,8 @@ module.exports = class extends SubApp {
     redirectIfLoggedIn(req, res, next) {
         if (req.session.user) {
             res.redirect("/")
+        } else {
+            next()
         }
     }
 }
