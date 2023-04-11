@@ -48,6 +48,9 @@ function registerSubApps(app, ...subapps) {
         app.subapps[instance.NAME] = instance
         app.use(instance.SLUG, instance.router)
     }
+    for (const subApp in app.subapps) {
+        app.subapps[subApp].configure()
+    }
 }
 
 function registerSubModules(app, ...modules) {

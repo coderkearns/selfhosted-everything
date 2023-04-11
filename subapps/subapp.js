@@ -6,11 +6,13 @@ module.exports = class SubApp {
         this.router = express.Router()
 
         this.initialize()
-        this.configureRouter(this.router)
     }
 
     initialize() { }
     close() { }
 
+    configure() {
+        this.configureRouter(this.router)
+    }
     configureRouter(router) { }
 }
