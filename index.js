@@ -37,12 +37,13 @@ app.use((err, req, res, next) => {
 })
 
 app.close = () => {
-    console.log(`[app] Closing global store`)
-    app.store.save()
     for (const subApp in app.subapps) {
         console.log(`[subapp] Closing ${subApp}`)
         app.subapps[subApp].close()
     }
+
+    console.log(`[app] Closing global store`)
+    app.store.save()
 }
 
 
