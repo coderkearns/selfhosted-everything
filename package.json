@@ -4,8 +4,8 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "start": "node index.js",
-        "dev": "node --watch index.js"
+        "start": "node www.js",
+        "dev": "node --watch www.js"
     },
     "keywords": [],
     "author": "coderkearns <https://github.com/coderkearns>",
