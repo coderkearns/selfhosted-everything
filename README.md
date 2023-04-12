@@ -45,7 +45,7 @@ A JSON representation would look something like this:
 {
     "<username>": {
         "username": "<username>",
-        "settings: {}
+        "settings": {}
     }
 }
 ```
@@ -60,7 +60,7 @@ A JSON representation would look something like this:
         "files": {
             "<name>": "<file>",
             "<name>": "<file>",
-            ...
+            "<name-n>": "<file-n>",
         }
     }
 }
