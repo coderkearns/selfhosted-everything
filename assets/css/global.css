@@ -29,6 +29,9 @@ html,
 body {
     margin: 0;
     padding: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
     background-color: var(--c-background);
     color: var(--c-text);
     font-size: var(--font-size);
@@ -55,7 +58,8 @@ header nav {
 
 main {
     width: 100%;
-    height: calc(100vh - 3rem);
+    /* height: calc(100vh - 3rem); */
+        flex: 1 0 auto;
     margin: 0;
 }
 

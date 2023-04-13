@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -20,13 +21,16 @@
 </head>
 
 <body>
+<script>
+  0
+</script> <!-- This fixes FOUC on firefox -->
 
 <header>
   <nav>
-    <a href="/">Home</a>
-    <a href="/files">Files</a>
-    <a href="/notes">Notes</a>
-    <a href="/login">Login</a>
+    <a rel="prefetch" href="/">Home</a>
+    <a rel="prefetch" href="/files">Files</a>
+    <a rel="prefetch" href="/notes">Notes</a>
+    <a rel="prefetch" href="/login">Login</a>
   </nav>
 </header>
 
