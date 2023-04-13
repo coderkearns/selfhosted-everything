@@ -22,6 +22,7 @@ registerSubApps(app,
     require("./subapps/register"),
     require("./subapps/login"),
     require("./subapps/files"),
+    require("./subapps/notes")
 )
 
 // 404 Handler

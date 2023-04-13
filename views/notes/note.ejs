@@ -1,0 +1,24 @@
+<%- include("../includes/header", {
+    title: "Files",
+    styles: ["/assets/files.css"]
+}) %>
+
+<aside class="notes">
+  <ul>
+    <% for (const note in notes) { %>
+    <li><a href="/notes/<%= note %>"><%= notes[note].title %></a></li>
+    <% } %>
+  </ul>
+</aside>
+
+<div class="note">
+
+  <form <%- form %> enctype="application/json">
+    <h1><input name="title" value="<%= note.title %>"></h1>
+    <textarea name="contents"><%= note.contents %></textarea>
+    <input type="submit" value="Save">
+  </form>
+
+</div>
+
+<%- include("../includes/footer") %>
