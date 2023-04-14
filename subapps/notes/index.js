@@ -1,6 +1,9 @@
+const express = require("express")
+
 const SubApp = require("../subapp")
 const requireAuth = require("../../shared/requireAuth")
 const Store = require("../../shared/store")
+const useApi = require("../../shared/api")
 
 module.exports = class extends SubApp {
     static NAME = "notes"
@@ -25,15 +28,9 @@ module.exports = class extends SubApp {
             const user = this.getUser(req.session.user)
 
             res.render("notes/note", {
-                note: { title: "", contents: "" },
-                notes: user.notes,
-                form: "method='POST' action='/notes/'"
+                note: { id: null, title: "", contents: "" },
+                notes: user.notes
             })
-        })
-
-        router.post("/", (req, res) => {
-            const id = this.addNote(req.session.user, req.body.title, req.body.contents)
-            res.redirect(`/notes/${id}`)
         })
 
         router.get("/:id", (req, res) => {
@@ -46,32 +43,25 @@ module.exports = class extends SubApp {
             }
 
             res.render("notes/note", {
-                note,
+                note: { id: req.params.id, ...note },
                 notes: user.notes,
-                form: `method='PUT' action='/notes/${req.params.id}'`
             })
         })
 
-        router.put("/:id", (req, res) => {
-            const user = this.getUser(req.session.user)
-            const note = user.notes[req.params.id]
 
-            if (!note) {
-                res.redirect("/notes")
-                return
+        useApi(router, "/api", {
+            new: (user, data) => {
+                const id = this.addNote(user, data)
+                return { success: true, id }
+            },
+            update: (user, data) => {
+                this.updateNote(user, data.id, data.updates)
+                return { success: true }
+            },
+            delete: (user, data) => {
+                this.deleteNote(user, data.id)
+                return { success: true }
             }
-
-            if (req.body.title) {
-                note.title = req.body.title
-            }
-
-            if (req.body.contents) {
-                note.contents = req.body.contents
-            }
-
-            console.log(note)
-
-            res.redirect(`/notes/${req.params.id}`)
         })
     }
 
@@ -89,15 +79,33 @@ module.exports = class extends SubApp {
         return user
     }
 
-    addNote(username, title, contents) {
+    _generateID() {
+        return Math.random().toString(36).substr(2, 9)
+    }
+
+    addNote(username, { title, contents = "" }) {
         const user = this.getUser(username)
-        const id = this.makeID()
-        user.notes[id] = { id, title, contents }
-        console.log(user.notes[id])
+        const id = this._generateID()
+        user.notes[id] = { title, contents }
+        this.store.set(username, user)
         return id
     }
 
-    makeID() {
-        return `${Math.random().toString(36).substr(2, 9)}`
+    updateNote(username, id, updates) {
+        const user = this.getUser(username)
+        user.notes[id] = { ...user.notes[id], ...updates }
+        this.store.set(username, user)
+    }
+
+    deleteNote(username, id) {
+        const user = this.getUser(username)
+        delete user.notes[id]
+        this.store.set(username, user)
+    }
+
+    clearNotes(username) {
+        const user = this.getUser(username)
+        user.notes = {}
+        this.store.set(username, user)
     }
 }

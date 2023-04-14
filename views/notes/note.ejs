@@ -13,12 +13,73 @@
 
 <div class="note">
 
-  <form <%- form %> enctype="application/json">
-    <h1><input name="title" value="<%= note.title %>"></h1>
-    <textarea name="contents"><%= note.contents %></textarea>
-    <input type="submit" value="Save">
-  </form>
+  <div class="form">
+    <h1><input id="title" value="<%= note.title %>"></h1>
+    <textarea id="contents"><%= note.contents %></textarea>
+    <button onclick="save()">Save</button>
+  </div>
 
 </div>
 
+<script>
+  <% if (note.id === null) { %>
+  let id = null;
+  <% } else { %>
+  let id = "<%= note.id %>";
+  <% } %>
+
+  const title = document.getElementById("title");
+  const contents = document.getElementById("contents");
+
+  function save() {
+    if (id === null) {
+      fetch("/notes/api", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          action: "new",
+          data: {
+            title: title.value,
+            contents: contents.value
+          }
+        })
+      }).then(res => res.json()).then(data => {
+        if (data.error) {
+          console.error(data.error);
+        } else {
+          window.location.href = "/notes/" + data.id;
+        }
+      }).catch(err => {
+        console.error(err);
+      })
+    } else {
+      fetch("/notes/api", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          action: "update",
+          data: {
+            id,
+            updates: {
+              title: title.value,
+              contents: contents.value
+            }
+          }
+        })
+      }).then(res => res.json()).then(data => {
+        if (data.error) {
+          console.error(data.error);
+        } else {
+          window.location.href = "/notes/" + id;
+        }
+      }).catch(err => {
+        console.error(err);
+      })
+    }
+  }
+</script>
 <%- include("../includes/footer") %>
