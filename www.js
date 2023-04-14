@@ -6,6 +6,9 @@ const server = app.listen(PORT, "0.0.0.0", () => {
     console.log(`[server] Listening on port ${PORT}`)
 })
 
+global.app = app
+global.server = server
+
 function shutdown(err) {
     setTimeout(() => {
         console.log("[server] Timed out closing...")

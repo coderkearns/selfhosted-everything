@@ -66,6 +66,20 @@ A JSON representation would look something like this:
 }
 ```
 
+## Live Debugging Instructions
+
+1. Run in inspect mode
+
+```shell
+$ node --inspect www.js
+```
+
+2. Open chrome inspector
+
+[chrome://inspect](chrome://inspect)
+
+3. Control using `global.app` and `global.server`
+
 ## License
 
 This project is licensed under the [MIT](https://choosealicense.com/licenses/mit/) License - see the [LICENSE](./LICENSE) file for details.
