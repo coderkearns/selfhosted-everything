@@ -109,6 +109,7 @@ textarea {
 input:not([type=submit]) {
     border: none;
     border-bottom: 0.2rem solid var(--c-primary-2);
+    border-radius: 0;
     background-color: transparent;
     outline: none;
     transition: border-bottom 0.15s;
