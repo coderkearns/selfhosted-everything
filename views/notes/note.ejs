@@ -1,6 +1,6 @@
 <%- include("../includes/header", {
     title: "Files",
-    styles: ["files.css"]
+    styles: ["note.css"]
 }) %>
 
 <aside class="notes">
@@ -12,13 +12,9 @@
 </aside>
 
 <div class="note">
-
-  <div class="form">
-    <h1><input id="title" value="<%= note.title %>"></h1>
-    <textarea id="contents"><%= note.contents %></textarea>
+    <h1><input id="title" placeholder="Title here..." value="<%= note.title %>"></h1>
+    <textarea id="contents" placeholder="Note here..."><%= note.contents %></textarea>
     <button onclick="save()">Save</button>
-  </div>
-
 </div>
 
 <script>

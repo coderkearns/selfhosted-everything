@@ -82,3 +82,48 @@ h6 {
     margin: 0 0 var(--s-medium) 0;
     padding: 0;
 }
+
+button {
+    font-size: 1em;
+}
+
+:where(button, input[type=submit]) {
+    background-color: var(--c-primary-1);
+    color: var(--c-background);
+    padding: var(--s-small) var(--s-medium);
+    border: 0;
+    border-radius: 0.25rem;
+    transition: 0.15s;
+}
+
+:where(button, input[type=submit]):hover,
+:where(button, input[type=submit]):focus {
+    background-color: var(--c-primary-2);
+}
+
+input,
+textarea {
+    font-size: 1em;
+}
+
+input:not([type=submit]) {
+    border: none;
+    border-bottom: 0.2rem solid var(--c-primary-2);
+    background-color: transparent;
+    outline: none;
+    transition: border-bottom 0.15s;
+}
+
+input:not([type=submit]):hover,
+input:not([type=submit]):focus {
+    border-color: var(--c-primary-1);
+}
+
+textarea {
+    flex-grow: 1;
+    border: none;
+    width: 100%;
+    background-color: transparent;
+    outline: none;
+    resize: none;
+}

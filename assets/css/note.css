@@ -1,0 +1,18 @@
+main {
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+}
+
+div.note {
+    margin: var(--s-large);
+    display: flex;
+    flex-direction: column;
+}
+
+div.note>* {
+    margin: 0 0 var(--s-medium) 0;
+}
+
+#title {
+    width: 100%;
+}

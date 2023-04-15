@@ -4,7 +4,8 @@ main {
     justify-content: center;
 }
 
-main>div {
+main>div,
+main>form {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -16,4 +17,13 @@ div.form {
     display: flex;
     flex-direction: column;
     gap: var(--s-small);
+}
+
+input {
+    width: 100%;
+    text-align: center;
+}
+
+input[type=file] {
+    border: none;
 }
