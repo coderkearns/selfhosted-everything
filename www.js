@@ -6,6 +6,12 @@ const server = app.listen(PORT, "0.0.0.0", () => {
     console.log(`[server] Listening on port ${PORT}`)
 })
 
+server.on('upgrade', (request, socket, head) => {
+    app.wss.handleUpgrade(request, socket, head, socket => {
+        app.wss.emit('connection', socket, request);
+    });
+});
+
 global.app = app
 global.server = server
 

@@ -13,7 +13,8 @@ registerSubModules(app,
     modules.useViewEngine,
     modules.useAssets,
     modules.useSession,
-    modules.useStore(`global.json`)
+    modules.useWebsocket,
+    modules.useStore(`global.json`),
 )
 
 registerSubApps(app,
