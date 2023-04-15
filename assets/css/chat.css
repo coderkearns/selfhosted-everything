@@ -1,0 +1,54 @@
+main {
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+}
+
+div.chat {
+    margin: var(--s-large);
+    display: grid;
+    grid-template-rows: 2rem 1fr 2rem;
+}
+
+div.sender {
+    display: flex;
+    gap: var(--s-small);
+}
+
+div.sender input {
+    flex-grow: 1;
+}
+
+ul#messages {
+    padding: 0;
+    list-style: none;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-medium);
+
+    align-items: end;
+}
+
+li.message {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-small);
+}
+
+li.message.me {
+    align-self: start;
+}
+
+li.message>p {
+    margin: 0;
+    width: fit-content;
+    background: var(--c-primary-1);
+    color: var(--c-background);
+    padding: var(--s-small);
+    border-radius: var(--s-small);
+}
+
+li.message>small {
+    font-size: 1rem;
+    color: var(--c-primary-2);
+}
