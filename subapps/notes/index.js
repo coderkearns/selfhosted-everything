@@ -2,7 +2,7 @@ const express = require("express")
 
 const SubApp = require("../subapp")
 const requireAuth = require("../../shared/requireAuth")
-const Store = require("../../shared/store")
+const MultiStore = require("../../shared/multiStore")
 const useApi = require("../../shared/api")
 
 module.exports = class extends SubApp {
@@ -10,7 +10,7 @@ module.exports = class extends SubApp {
     static SLUG = "/notes"
 
     initialize() {
-        this.store = Store.loadFrom("notes.json")
+        this.store = MultiStore.loadFrom("notes")
     }
 
     configureRouter(router) {

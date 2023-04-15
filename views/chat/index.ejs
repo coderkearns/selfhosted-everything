@@ -1,0 +1,22 @@
+<%- include("../includes/header", {
+    title: "Chat",
+    styles: ["maintext.css"]
+}) %>
+
+<div class="content">
+
+  <h1>Chat</h1>
+
+  <p class="link"><a href="/chat/new">New Chat</a></p>
+
+  <h2>Your Chats</h2>
+
+  <ul>
+    <% for (const chat of chats) { %>
+    <li><a href="/chat/<%= chat.id %>"><%= chat.name %></a></li>
+    <% } %>
+  </ul>
+
+</div>
+
+<%- include("../includes/footer") %>

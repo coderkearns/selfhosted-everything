@@ -12,7 +12,7 @@ module.exports = function useWebsocket(app) {
             this.listeners[event].push(callback)
         },
         emit(connection, event, data) {
-            this.listeners[event].forEach(callback => callback(connection, data))
+            (this.listeners[event] || []).forEach(callback => callback(connection, data))
         }
     }
 

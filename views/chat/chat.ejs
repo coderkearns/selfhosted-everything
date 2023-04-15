@@ -1,0 +1,84 @@
+<%- include("../includes/header", {
+    title: `${chat.name} | Chat`,
+    styles: ["note.css"]
+}) %>
+
+<aside class="chats">
+  <ul>
+    <% for (const chat of chats) { %>
+    <li><a href="/chat/<%= chat.id %>"><%= chat.name %></a></li>
+    <% } %>
+  </ul>
+</aside>
+
+<div class="chat">
+  <h1><%= chat.name %></h1>
+  <ul id="messages">
+    <% for (const message of chat.messages) { %>
+    <% if (message.author === user) { %>
+    <li class="message me">
+      <p><%= message.content %></p>
+    </li>
+    <% } else { %>
+    <li class="message">
+      <small><%= message.author %></small>
+      <p><%= message.content %></p>
+    </li>
+    <% } %>
+    <% } %>
+  </ul>
+  <div class="sender">
+    <input id="msg" type="text" placeholder="Message...">
+    <button onclick="send()">Send</button>
+  </div>
+</div>
+
+<script>
+  const messages = document.getElementById("messages");
+  const msg = document.getElementById("msg");
+
+  const ws = new WebSocket("ws://localhost:3000/");
+
+  function send() {
+    ws.send(JSON.stringify({
+      event: "chat",
+      data: {
+        chat: "<%= chat.id %>",
+        message: {
+          author: "<%= user %>",
+          content: msg.value
+        }
+      }
+    }))
+    msg.value = "";
+    msg.focus()
+  }
+
+  ws.onmessage = function(event) {
+    const data = JSON.parse(event.data);
+    if (data.event !== "chat") {
+      return;
+    }
+
+    const {
+      chat,
+      message
+    } = data.data;
+
+    if (chat !== "<%= chat.id %>") {
+      return;
+    }
+
+    if (message.author === "<%= user %>") {
+      messages.innerHTML += `<li class="message me">
+        <p>${message.content}</p>
+      </li>`;
+    } else {
+      messages.innerHTML += `<li class="message"><small>${message.author}</small>
+        <p>${message.content}</p>
+      </li>`;
+    }
+  }
+</script>
+
+<%- include("../includes/footer") %>
