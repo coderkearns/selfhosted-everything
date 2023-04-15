@@ -1,5 +1,5 @@
 // create a websocket server
-const ws = require("ws")
+const { Server } = require("ws")
 
 module.exports = function useWebsocket(app) {
     app.ws = {
@@ -11,12 +11,12 @@ module.exports = function useWebsocket(app) {
             }
             this.listeners[event].push(callback)
         },
-        emit(event, ...args) {
-            this.listeners[event].forEach(callback => callback(...args))
+        emit(connection, event, data) {
+            this.listeners[event].forEach(callback => callback(connection, data))
         }
     }
 
-    const wss = new ws.Server({ noServer: true })
+    const wss = new Server({ noServer: true })
     app.wss = wss
 
     wss.on("connection", function connection(ws) {
@@ -24,7 +24,7 @@ module.exports = function useWebsocket(app) {
 
         ws.on("message", function incoming(message) {
             const data = JSON.parse(message)
-            app.ws.emit(data.event, data.data)
+            app.ws.emit(ws, data.event, data.data)
         })
     })
 }
