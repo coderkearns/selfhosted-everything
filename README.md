@@ -80,6 +80,14 @@ $ node --inspect www.js
 
 3. Control using `global.app` and `global.server`
 
+## TODO
+
+- [ ] Add file delete functionality
+- [ ] Add files and chat connections
+- [ ] Redo notes to allow markdown/rich text/other content
+- [ ] Add files and notes connections
+- [ ] Dark mode? via adding user settings
+
 ## License
 
 This project is licensed under the [MIT](https://choosealicense.com/licenses/mit/) License - see the [LICENSE](./LICENSE) file for details.
