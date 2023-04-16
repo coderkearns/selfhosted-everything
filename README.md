@@ -83,7 +83,7 @@ $ node --inspect www.js
 ## TODO
 
 - [X] Add file delete functionality
-- [ ] Add files and chat connections
+- [X] Add files and chat connections
 - [ ] Redo notes to allow markdown/rich text/other content
 - [ ] Add files and notes connections
 - [ ] Dark mode? via adding user settings

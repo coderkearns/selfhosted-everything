@@ -1,16 +1,19 @@
-<% if (message.type === "text") { %>
-    <% if (message.author === user) { %>
-        <li class="message me">
-            <p><%= message.content %></p>
-        </li>
-    <% } else { %>
-        <li class="message">
-            <small><%= message.author %></small>
-            <p><%= message.content %></p>
-        </li>
-    <% } %>
-<% } else if (message.type === "file") { %>
-    <li class="file">TODO FILE HERE</li>
+<li class="<%= message.type %><% if (message.author === user) {%> me<% } %>">
+    <% if (message.author !==user) { %>
+        <small>
+            <%= message.author %>
+        </small>
+        <% } %>
+<% if (message.type==="text" ) { %>
+    <p>
+        <%= message.content %>
+    </p>
+    <% } else if (message.type==="file" ) { %>
+        <p><a href="/files/download?file=<%= message.content.file %>">
+                <%= message.content.name %>
+            </a>
+        </p>
 <% } else { %>
-    <li>TODO unallowed type '<%= message.type %>'</li>
+<p>TODO unallowed type '<%= message.type %>'</p>
 <% } %>
+</li>

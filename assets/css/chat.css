@@ -35,11 +35,11 @@ li.message {
     gap: var(--s-small);
 }
 
-li.message.me {
+li.me {
     align-self: start;
 }
 
-li.message>p {
+li>p {
     margin: 0;
     width: fit-content;
     background: var(--c-primary-1);
@@ -51,4 +51,49 @@ li.message>p {
 li.message>small {
     font-size: 1rem;
     color: var(--c-primary-2);
+}
+
+li.file>p::after {
+    content: '📄';
+}
+
+li.file.me>p::after {
+    content: '';
+}
+
+li.file.me>p::before {
+    content: '📄';
+}
+
+li.file a {
+    color: var(--c-background);
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal:not(.open) {
+    display: none;
+}
+
+.modal>div {
+    background-color: var(--c-background);
+    padding: var(--s-medium);
+    border-radius: 0.25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--s-small);
 }

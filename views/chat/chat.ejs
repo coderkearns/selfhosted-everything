@@ -19,9 +19,30 @@
     <% } %>
   </ul>
   <div class="sender">
+    <button onclick="document.getElementsByClassName('modal')[0].classList.toggle('open')">+</button>
     <input id="msg" type="text" placeholder="Message...">
     <button onclick="sendTextMessage()">Send</button>
   </div>
+</div>
+
+<div class="modal">
+    <div>
+        <h2>Media Options</h2>
+        <h3>File Select</h3>
+        <select id="files" onchange="sendFile(JSON.parse(this.value))">
+            <option disabled selected>-</option>
+        </select>
+        <button onclick="document.getElementsByClassName('modal')[0].classList.toggle('open')">Close</button>
+        <script>
+            const filesEl = document.getElementById("files");
+            fetch("/files/api/list").then(res => res.json()).then(files => {
+                files.forEach(file => {
+                    filesEl.innerHTML += `<option value='${JSON.stringify(file)}'>${file.name}</option>`;
+                })
+            });
+        </script>
+
+    </div>
 </div>
 
 <script>
@@ -46,6 +67,20 @@
     msg.focus()
   }
 
+        function sendFile(file) {
+            ws.send(JSON.stringify({
+                event: "chat",
+                data: {
+                    chat: "<%= chat.id %>",
+                    message: {
+                        type: "file",
+                        author: "<%= user %>",
+                        content: file
+                    }
+                }
+            }))
+        }
+
   ws.onmessage = function(event) {
     const data = JSON.parse(event.data);
     if (data.event !== "chat") {
@@ -53,23 +88,14 @@
     }
 
     const {
-      chat,
-      message
+        chat
     } = data.data;
 
     if (chat !== "<%= chat.id %>") {
       return;
     }
 
-    if (message.author === "<%= user %>") {
-      messages.innerHTML += `<li class="message me">
-        <p>${message.content}</p>
-      </li>`;
-    } else {
-      messages.innerHTML += `<li class="message"><small>${message.author}</small>
-        <p>${message.content}</p>
-      </li>`;
-    }
+      location.reload();
   }
 </script>
 

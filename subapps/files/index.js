@@ -73,6 +73,9 @@ module.exports = class extends SubApp {
             res.redirect("/files")
         })
 
+        router.get("/api/list", (req, res) => {
+            res.json(this.getFileList(req.session.user))
+        })
     }
 
     close() {
@@ -87,6 +90,10 @@ module.exports = class extends SubApp {
             this.store.set(username, user)
         }
         return user
+    }
+
+    getFileList(username) {
+        return Object.entries(this.getUser(username).files).map(e => ({ name: e[0], file: e[1] }))
     }
 
     addFile(username, name, file) {
