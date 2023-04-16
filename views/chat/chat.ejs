@@ -1,12 +1,12 @@
 <%- include("../includes/header", {
-    title: `${chat.name} | Chat`,
+    title: chat.name + " | Chat",
     styles: ["chat.css"]
 }) %>
 
 <aside class="chats">
   <ul>
     <% for (const chat of chats) { %>
-    <li><a href="/chat/<%= chat.id %>"><%= chat.name %></a></li>
+        <li><a href="/chat/<%= chat.id %>"><%= chat.name %></a></li>
     <% } %>
   </ul>
 </aside>
@@ -15,21 +15,12 @@
   <h1><%= chat.name %></h1>
   <ul id="messages">
     <% for (const message of chat.messages) { %>
-    <% if (message.author === user) { %>
-    <li class="message me">
-      <p><%= message.content %></p>
-    </li>
-    <% } else { %>
-    <li class="message">
-      <small><%= message.author %></small>
-      <p><%= message.content %></p>
-    </li>
-    <% } %>
+        <%- include("message", { message, user }) %>
     <% } %>
   </ul>
   <div class="sender">
     <input id="msg" type="text" placeholder="Message...">
-    <button onclick="send()">Send</button>
+    <button onclick="sendTextMessage()">Send</button>
   </div>
 </div>
 
@@ -39,12 +30,13 @@
 
   const ws = new WebSocket("ws://localhost:3000/");
 
-  function send() {
+  function sendTextMessage() {
     ws.send(JSON.stringify({
       event: "chat",
       data: {
         chat: "<%= chat.id %>",
         message: {
+          type: "text",
           author: "<%= user %>",
           content: msg.value
         }
@@ -80,5 +72,6 @@
     }
   }
 </script>
+
 
 <%- include("../includes/footer") %>

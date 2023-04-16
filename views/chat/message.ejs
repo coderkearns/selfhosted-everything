@@ -1,0 +1,16 @@
+<% if (message.type === "text") { %>
+    <% if (message.author === user) { %>
+        <li class="message me">
+            <p><%= message.content %></p>
+        </li>
+    <% } else { %>
+        <li class="message">
+            <small><%= message.author %></small>
+            <p><%= message.content %></p>
+        </li>
+    <% } %>
+<% } else if (message.type === "file") { %>
+    <li class="file">TODO FILE HERE</li>
+<% } else { %>
+    <li>TODO unallowed type '<%= message.type %>'</li>
+<% } %>
