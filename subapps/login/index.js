@@ -26,14 +26,14 @@ module.exports = class extends SubApp {
             }
 
             req.session.user = username
-            res.redirect("/")
+            res.redirect(req.query.redirect || "/")
         })
     }
 
     /* MIDDLEWARE */
     redirectIfLoggedIn(req, res, next) {
         if (req.session.user) {
-            res.redirect("/")
+            res.redirect(req.query.redirect || "/")
         } else {
             next()
         }
