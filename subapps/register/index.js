@@ -10,7 +10,7 @@ module.exports = class extends SubApp {
         })
 
         router.post("/", this.app.subapps.login.redirectIfLoggedIn, (req, res) => {
-            const username = req.body.username
+            const username = req.body.username.toLowerCase()
 
             if (!username) {
                 res.redirect("/register")
