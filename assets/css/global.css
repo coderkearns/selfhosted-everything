@@ -128,3 +128,9 @@ textarea {
     outline: none;
     resize: none;
 }
+
+ul {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-small);
+}

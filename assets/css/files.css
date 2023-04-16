@@ -1,0 +1,11 @@
+a.delete {
+    background-color: var(--c-danger);
+    color: var(--c-background);
+    padding: 0 var(--s-small);
+    border-radius: 0.2rem;
+    transition: 0.2s;
+}
+
+a.delete:hover {
+    padding: 0 var(--s-medium);
+}

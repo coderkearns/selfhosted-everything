@@ -13,7 +13,10 @@
 
   <ul>
     <% for (const file in files) { %>
-    <li><a href="/files/download?file=<%= files[file] %>"><%= file %></a></li>
+    <li>
+      <a class="delete" href="/files/delete?file=<%= files[file] %>">X</a>
+      <a href="/files/download?file=<%= files[file] %>"><%= file %></a>
+    </li>
     <% } %>
   </ul>
 

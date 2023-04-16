@@ -82,7 +82,7 @@ $ node --inspect www.js
 
 ## TODO
 
-- [ ] Add file delete functionality
+- [X] Add file delete functionality
 - [ ] Add files and chat connections
 - [ ] Redo notes to allow markdown/rich text/other content
 - [ ] Add files and notes connections

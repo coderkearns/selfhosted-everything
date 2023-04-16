@@ -56,7 +56,12 @@ module.exports = class extends SubApp {
             } else {
                 res.redirect("/files")
             }
+        })
 
+        router.get("/delete", (req, res) => {
+            const file = req.query.file
+            this.deleteFile(req.session.user, file)
+            res.redirect("/files")
         })
 
         router.get("/upload", (req, res) => {
@@ -87,6 +92,15 @@ module.exports = class extends SubApp {
     addFile(username, name, file) {
         const user = this.getUser(username)
         user.files[name] = file
+    }
+
+    deleteFile(username, file) {
+        const user = this.getUser(username)
+        const name = Object.entries(user.files).filter(e => e[1] === file)[0][0]
+        delete user.files[name]
+        this.store.set(username, user)
+        fs.unlinkSync(path.join(UPLOADS_PATH, file))
+        this.store.save()
     }
 
     streamFile(file, res) {
