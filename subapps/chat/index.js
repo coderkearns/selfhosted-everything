@@ -11,6 +11,11 @@ module.exports = class extends SubApp {
     initialize() {
         this.store = MultiStore.loadFrom("chats")
 
+        this.interval = setInterval(() => {
+            console.log(`[${this.constructor.NAME}] Saving data...`)
+            this.store.save()
+        }, 30 * 60 * 1000)
+
         this.app.ws.on("chat", (connection, data) => {
             this.app.ws.connections.forEach(c => {
                 c.send(JSON.stringify({ event: "chat", data: data }))
@@ -66,6 +71,7 @@ module.exports = class extends SubApp {
     }
 
     close() {
+        clearInterval(this.interval)
         this.store.save()
     }
 
