@@ -45,6 +45,7 @@ app.close = () => {
     }
 
     console.log(`[app] Closing global store`)
+    clearInterval(app.store.interval)
     app.store.save()
 }
 
@@ -65,6 +66,7 @@ function registerSubApps(app, ...subapps) {
 
 function registerSubModules(app, ...modules) {
     for (const module of modules) {
+        console.log(`[module] Running ${module.name}`)
         module(app)
     }
 }

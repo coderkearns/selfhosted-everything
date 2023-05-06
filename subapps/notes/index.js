@@ -11,6 +11,11 @@ module.exports = class extends SubApp {
 
     initialize() {
         this.store = MultiStore.loadFrom("notes")
+
+        this.interval = setInterval(() => {
+            console.log(`[${this.constructor.NAME}] Saving data...`)
+            this.store.save()
+        }, 30 * 60 * 1000)
     }
 
     configureRouter(router) {
@@ -66,6 +71,7 @@ module.exports = class extends SubApp {
     }
 
     close() {
+        clearInterval(this.interval)
         this.store.save()
     }
 
